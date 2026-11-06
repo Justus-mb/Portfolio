@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Impressum und Datenschutz tragen zusaetzlich ein noindex-Meta-Tag.

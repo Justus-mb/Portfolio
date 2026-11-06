@@ -1,0 +1,58 @@
+/* Stylesheet fuer Impressum und Datenschutz — gleiche Gestaltung wie portfolio.html */
+@import url("Schriften/schriften.css");
+
+:root{
+  --papier:#F5F6F3; --blatt:#FFFFFF; --tusche:#171B20; --grau:#5A6470;
+  --linie:#C7CDD4; --blau:#1F4B99; --radius:2px; --maxw:800px;
+  --font-display:"Saira",sans-serif;
+  --font-body:"IBM Plex Sans",sans-serif;
+  --font-mono:"IBM Plex Mono",monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:var(--papier); color:var(--tusche);
+  font-family:var(--font-body); font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grau)}
+
+/* Kopfzeile */
+header{border-bottom:1px solid var(--linie);background:var(--blatt)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;height:58px}
+.kopf-name{font-family:var(--font-display);font-weight:700;font-size:17px;text-decoration:none;color:var(--tusche)}
+.zurueck{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;color:var(--grau)}
+.zurueck:hover{color:var(--blau)}
+
+/* Zeichnungsblatt */
+main{padding:42px 0 60px}
+.blatt{
+  background:var(--blatt);border:1px solid var(--linie);border-radius:var(--radius);
+  padding:38px 40px;
+}
+@media(max-width:640px){ .blatt{padding:26px 22px} }
+
+h1{font-family:var(--font-display);font-size:29px;line-height:1.15;margin:0 0 4px}
+h2{font-family:var(--font-display);font-size:18px;line-height:1.25;margin:34px 0 8px;
+  padding-top:14px;border-top:1px solid var(--linie)}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:26px}
+h3{font-family:var(--font-display);font-size:15px;margin:20px 0 4px}
+p,ul{margin:0 0 12px}
+ul{padding-left:20px}
+li{margin-bottom:4px}
+a{color:var(--blau)}
+.adresse{font-style:normal;margin:0 0 12px}
+.hinweis{
+  border-left:2px solid var(--blau);padding:2px 0 2px 14px;
+  color:var(--grau);font-size:14.5px;margin:14px 0 18px;
+}
+.stand{margin-top:34px;padding-top:14px;border-top:1px solid var(--linie)}
+
+/* Fusszeile */
+footer{border-top:1px solid var(--linie);padding:22px 0 40px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+footer a{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--grau);text-decoration:none;margin-left:18px}
+footer a:first-child{margin-left:0}
+footer a:hover{color:var(--blau)}

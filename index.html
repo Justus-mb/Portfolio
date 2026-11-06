@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Justus Koch — Portfolio</title>
+<meta name="description" content="Portfolio von Justus Koch, Maschinenbauingenieur (B.Eng.) — Konstruktion, Fertigung und Elektronik-Prototyping.">
+
+<!-- ============================================================
+     BEARBEITUNGSANLEITUNG
+     ============================================================
+     Alle Inhalte der Seite stehen im CONTENT-Block direkt unter
+     dieser Anleitung. HTML/CSS musst du nicht anfassen.
+
+     1) TEXTE ÄNDERN
+        Einfach den Text zwischen den Anführungszeichen ändern.
+        Zeilenumbrüche in Langtexten mit \n\n (neuer Absatz).
+
+     2) PROJEKT HINZUFÜGEN
+        Einen bestehenden Block { ... } in "projekte" kopieren,
+        mit Komma anhängen und Inhalte anpassen.
+
+     3) BILDER
+        Bilder in den Ordner "Bilder/" neben dieser Datei legen
+        und den Dateinamen in "bilder": [ ... ] eintragen, z. B.
+        "Bilder/pizzaofen-1.JPG". Fehlt ein Bild, zeigt die Seite
+        automatisch einen neutralen Platzhalter.
+        Das Bild im Kopf (Hero) steht separat unter "heroBild" —
+        Foto z. B. als "Bilder/Portrait.jpg" ablegen.
+
+     4) PLATZHALTER
+        Alles, was mit [TODO: ...] beginnt, ist bewusst offen und
+        wird auf der Seite rot markiert, damit nichts Unfertiges
+        unbemerkt online geht.
+
+     5) PROJEKT AUSBLENDEN
+        "sichtbar": false setzen — der Eintrag bleibt erhalten,
+        wird aber nicht angezeigt.
+
+     6) PROJEKTNUMMERN (PRJ-001, PRJ-002, ...)
+        Werden automatisch vergeben — nicht im CONTENT eintragen.
+        Gezaehlt wird nur ueber die sichtbaren Projekte, in der
+        Reihenfolge des "projekte"-Arrays. Beim Umsortieren oder
+        Ausblenden nummeriert die Seite selbst neu, ohne Luecken.
+
+     7) IMPRESSUM UND DATENSCHUTZ
+        Stehen als eigene Seiten "impressum.html" und
+        "datenschutz.html" neben dieser Datei, verlinkt in der
+        Fusszeile. Gestaltung kommt aus "recht.css".
+        Rechtstexte dort direkt im HTML aendern, nicht im CONTENT.
+     ============================================================ -->
+
+<script>
+const CONTENT = {
+
+  // ---------- Kopf / Hero ----------
+  name: "Justus Koch",
+  titel: "Maschinenbauingenieur (B.Eng.)",
+  untertitel: "Konstruktion · Fertigung",
+  ueberMich:
+    "Maschinenbauingenieur mit dualem Hintergrund: Studium an der DHBW parallel zur " +
+    "praktischen Tätigkeit als Schlosser. Dadurch decke ich den Weg vom CAD-Modell bis " +
+    "zum fertigen Werkstück selbst ab: Konstruktion, Fertigungsplanung und Umsetzung " +
+    "in der Werkstatt.\n\n" +
+    "Neben der Mechanik entwickle ich Elektronik-Prototypen auf ESP32-Basis inklusive " +
+    "eigener Platinen und Firmware. Meine Projekte entstehen mit dem Anspruch, am Ende ein Produkt zu haben, das eine sinnvolle Anwendung im Alltag findet.",
+
+  // ---------- Bild im Kopf / Hero ----------
+  // Datei in den Ordner "Bilder/" legen. Fehlt sie, zeigt die Seite
+  // automatisch einen neutralen Platzhalter statt eines kaputten Bildes.
+  heroBild: {
+    datei: "Bilder/Portrait.jpg",
+    alt: "Portraitfoto Justus Koch",
+    bildunterschrift: "Justus Koch \u00b7 Konstruktion & Werkstatt"
+  },
+
+  // ---------- 3 Profil-Kacheln ----------
+  kacheln: [
+    {
+      titel: "Von der Zeichnung zum Teil",
+      text: "Praxis als Schlosser plus Ingenieurstudium: Ich konstruiere so, dass es sich auch wirtschaftlich fertigen lässt und fertige vieles selbst."
+    },
+    {
+      titel: "Mechanik + Elektronik",
+      text: "Mechatronische Projekte aus einer Hand: Gehäusekonstruktion, Platinenlayout in KiCad und Firmware in C++ auf ESP32."
+    },
+    {
+      titel: "Dokumentiert & belegbar",
+      text: "Saubere technische Dokumentation gehört für mich dazu, von der Stückliste bis zur wissenschaftlichen Ausarbeitung."
+    }
+  ],
+
+  // ---------- Werdegang (parallel: Studium + Beruf) ----------
+  werdegang: [
+    {
+      zeitraum: "2022 – 2025",
+      titel: "Bachelor of Engineering, Maschinenbau",
+      ort: "Duale Hochschule Baden-Württemberg (DHBW)",
+      text: "Duales Studium mit Schwerpunkt Konstruktion & Entwicklung. Studienarbeiten: Konstruktion und Prototypenbau einer Senkvorrichtung mit Tiefenanschlag; Konstruktion einer Schweißvorrichtung"
+    },
+    {
+      zeitraum: "2022 – 2026",
+      titel: "Schlosser",
+      ort: "W. Weese GmbH",
+      text: "Praxisphase parallel zum Studium und anschließende Tätigkeit. Manuelle Fertigung von Einzelteilen und Baugruppen, Montage, Wartung."
+    }
+  ],
+
+  // ---------- Projekte ----------
+  // Reihenfolge hier = Reihenfolge auf der Seite.
+  projekte: [
+    {
+      sichtbar: true,
+      titel: "Desktop CNC Fräsmaschine",
+      kurz: "Konstruktion einer Desktop CNC Fräsmaschine für Stahlbearbeitung. Status: in Konstruktion.",
+      lang:
+        "Projektstatus: in Konstruktion.\n\n" +
+        "Konstruktion einer Desktop CNC Fräsmaschine mit einem Bearbeitungsraum von 400x300x250 mm. Der Rahmen besteht aus geschweißten Stahlprofilen und -Blechen mit geschraubten Verbindungen der Unterbaugruppen. " +
+        "Kontakt- und Referenzflächen werden spanend nachbearbeitet. Die Maschine ist auf Stahlbearbeitung ausgelegt. " +
+        "Der Bearbeitungsraum ist eingehaust und Elektronik in externem Schrank untergebracht.\n\n" +
+        "Dokumentation mit Lastenheft, BOM, Fertigungszeichnungen, Schaltplan, Montageanleitung, Wartungsanleitung.\n" +
+        "Geplante Ausbaustufen: Lasermodul, Plotter mit Stift und Messer, 4. Achse",
+      technik: ["Solidworks", "FEM", "Fertigungs- und Montagegerechtes Konstruieren", "Spanende Bearbeitung", "FDM-Druck", "Steuerungssysteme"],
+      bilder: ["Bilder/Fraese-3.png", "Bilder/Fraese-1.png", "Bilder/Fraese-2.png"]
+    },  
+    {
+      sichtbar: true,
+      titel: "CAE",
+      kurz: "Struktur- und Strömungssimulation",
+      lang:
+        "Erfahrung mit Struktur- und Strömungsanalysen in Simcenter STAR-CCM+, Altair Inspire und einigen Freeware-Programmen.\n" +
+        "Darunter Spannungsanalysen, Topologieoptimierung, stationäre und transiente Simulationen, Heat Transfer.",
+      technik: ["FEM", "CFD"],
+      bilder: ["Bilder/cfd-1.png", "Bilder/cfd-2.png"]
+    },  
+    {
+      sichtbar: true,
+      titel: "3D-Scanning & Reverse Engineering",
+      kurz: "Bauteile digitalisieren, Freiformflächen, Montagepositionen, Kollisionsprüfung",
+      lang:
+        "Anpassung an Freiformflächen, Übernehmen von Montagepositionen und Prüfung von Bauteilkollisionen durch digitalisierte Bauteile.",
+      technik: ["Reverse Engineering", "Metrologie", "3D Scanner", "CAD Flächen- und Netzbearbeitung", "FDM-Druck"],
+      bilder: ["Bilder/scan-1.png", "Bilder/scan-2.png", "Bilder/scan-3.png"]
+    },
+    {
+      sichtbar: true,
+      titel: "Temperaturanzeige Pizzaofen",
+      kurz: "Live-Anzeige der Backraumtemperatur, Weboberfläche und grafische Darstellung.",
+      lang:
+        "Messsystem für einen Pizzaofen: Zwei Thermoelemente erfassen die Temperaturen, die Anzeige erfolgt über ein ESP32-Touchdisplay. " +
+        "Über WLAN stellt das Gerät eine Weboberfläche bereit, alle Messwerte werden als CSV geloggt und lassen sich grafisch auswerten.\n\n" +
+        "Das Gehäuse ist konstruiert und im FDM-Verfahren gedruckt und ausgelegt auf die Hitze in Ofennähe.",
+      technik: ["ESP32", "C++", "Thermoelemente", "Webinterface + CSV-Logging", "CAD", "FDM-Druck"],
+      bilder: ["Bilder/pizzaofen-1.JPG", "Bilder/pizzaofen-2.JPG", "Bilder/pizzaofen-3.JPG", "Bilder/pizzaofen-4.JPEG"]
+    },
+    {
+      sichtbar: true,
+      titel: "Microstage für Probenpositionierung",
+      kurz: "Konstruktion und Prototypenbau einer Microstage mit Piezomotor zur Positionierung für Microfluidics.",
+      lang:
+        "Konstruktion einer Microstage zur Positionierung im Bereich Microfluidics. " +
+        "Zwei Gehäusehälften aus gefrästem Aluminium, Kreuzrollen Linearführung, Piezo-Linearmotor. " +
+        "Schrittlängen im einstelligen Mikrometerbereich, Fertigung des Prototyps.\n\n",
+      technik: ["CAD-Konstruktion", "Toleranz- und Passungsauslegung", "Fertigungsgerechte Konstruktion", "Fertigungszeichnung"],
+      bilder: ["Bilder/stage-1.JPG", "Bilder/stage-2.JPG", "Bilder/stage-3.JPG", "Bilder/stage-4.JPG"]
+    },
+    {
+      sichtbar: true,
+      titel: "Senkvorrichtung mit Tiefenanschlag",
+      kurz: "Konstruktion und Prototypenbau eines Tiefenanschlags für Kegelsenker.",
+      lang:
+        "Entwicklung eines Tiefenanschlags für Kegelsenkungen: reproduzierbare Senktiefe " +
+        "ohne Messen nach jedem Werkstück. Das Projekt umfasste die vollständige " +
+        "Produktentwicklung: Anforderungsanalyse, Konzeptvergleich, Konstruktion, " +
+        "Fertigung des Prototyps und Erprobung.\n\n" +
+        "Die Arbeit ist in einer rund 60-seitigen wissenschaftlichen Ausarbeitung " +
+        "dokumentiert (Hochschulprojekt).",
+      technik: ["CAD-Konstruktion", "Toleranz- und Passungsauslegung", "Manuelle Zerspanung", "Technische Dokumentation", "FDM 3D-Druck"],
+      bilder: ["Bilder/Senker.jpg", "Bilder/Senker-fem.png"]
+    },
+    {
+      sichtbar: false,   // ausgeblendet, bis Bilder obd-1.jpg / obd-2.jpg vorliegen
+      titel: "OBD-Fehlerauslesegerät für Oldtimer",
+      kurz: "ESP32 mit eigener Platine zum Auslesen des Fehlerspeichers am VW Golf 2 (1991).",
+      lang:
+        "Eigenentwicklung eines Diagnosegeräts für die frühe VW-Eigendiagnose: Ein ESP32 " +
+        "liest den Fehlerspeicher des 1991er Golf 2 (1.8 RP) aus und zeigt die Fehlercodes " +
+        "im Klartext auf einem Display an. Bedienung über Taster, Stromversorgung aus dem Bordnetz.\n\n" +
+        "Die Platine ist in KiCad entworfen und extern gefertigt, Gehäuse aus dem " +
+        "FDM 3D-Drucker.",
+      technik: ["CAD", "3D Scan", "ESP32", "KiCad", "C++", "FDM-Druck"],
+      bilder: ["Bilder/obd-1.jpg", "Bilder/obd-2.jpg"]
+    },
+    {
+      sichtbar: true,
+      titel: "Multifunktionsanzeige im Oldtimer-Tacho",
+      kurz: "Anzeige von Geschwindigkeit und Umgebungsdaten, integriert in das Original-Kombiinstrument.",
+      lang:
+        "Nachrüstung einer digitalen Anzeige im Kombiinstrument des Golf 2: Geschwindigkeit " +
+        "und Umgebungsdaten werden erfasst und im Originaltacho dargestellt, ohne die " +
+        "Optik des Fahrzeugs zu verändern.\n\n",
+        technik: ["CAD", "3D Scan", "ESP32", "KiCad", "C++", "FDM-Druck"],
+        bilder: ["Bilder/tacho-1.jpg"]
+    },
+    {
+      sichtbar: true,
+      titel: "Küche",
+      kurz: "Küche geplant und gebaut.",
+      lang:
+        "Planung und Eigenbau einer Küche: Raumaufmaß, Konstruktion der Korpusse, " +
+        "Fertigung und Montage.\n" +
+        "WIG-geschweißter Stahlrahmen mit Blechblenden und Holzschubladen. Zunderoberfläche unbearbeitet und klar lackiert.",
+      technik: ["Planung / Aufmaß", "Möbelbau", "Montage", "WIG-Schweißen"],
+      bilder: ["Bilder/kueche-1.jpeg", "Bilder/kueche-2.png"]
+    },
+    {
+      sichtbar: true,
+      titel: "Schlosserarbeiten",
+      kurz: "Verschiedene Metallbauprojekte aus Ausbildung und eigener Werkstatt.",
+      lang:
+        "Auswahl an Metallbauprojekten aus der Tätigkeit als Schlosser und der eigenen " +
+        "Werkstatt.\n\n" +
+        "Tor mit geschmiedeten Nieten \n" +
+        "Fenstergitter \n" +
+        "Blechschrank \n" +
+        "Cortenstahl Treppe mit Handlauf \n" +
+        "Blech Briefkasten",
+      technik: ["Metallbearbeitung", "Manuelle Zerspanung", "Montage"],
+      bilder: ["Bilder/schlosser-1.jpeg", "Bilder/schlosser-2.jpg", "Bilder/schlosser-3.jpeg", "Bilder/schlosser-4.JPG", "Bilder/schlosser-5.JPG"]
+    },
+    {
+      sichtbar: true,
+      titel: "Näh- und Sattlerarbeiten",
+      kurz: "Handwerkliche Arbeiten mit Leder und technischen Textilien.",
+      lang: "",
+      technik: ["Leder / Textilien"],
+      bilder: ["Bilder/naehen-1.jpg", "Bilder/naehen-2.jpg"]
+    }
+  ],
+
+  // ---------- Kompetenzen ----------
+  kompetenzen: [
+    {
+      bereich: "CAD",
+      eintraege: [
+        { name: "Siemens NX", niveau: "Erfahrung aus dem Studium" },
+        { name: "SolidWorks", niveau: "Private Anwendung" },
+        { name: "Fusion 360 · Inventor · FreeCAD", niveau: "Anwendungserfahrung" }
+      ]
+    },
+    {
+      bereich: "CAE / Simulation",
+      eintraege: [
+        { name: "Simcenter STAR-CCM+", niveau: "Grundkenntnisse Fluidsimulation" },
+        { name: "Altair HyperMesh", niveau: "Grundkenntnisse Struktursimulation" },
+        { name: "Z88", niveau: "FEM-Grundlagen" }
+      ]
+    },
+    {
+      bereich: "Fertigung",
+      eintraege: [
+        { name: "Metallbearbeitung", niveau: "WIG/MAG Schweißen, Umformen, Schmieden, Konstruieren" },
+        { name: "Manuelle Zerspanung", niveau: "Drehen, Fräsen, Bohren" },
+        { name: "CNC Zerspanung", niveau: "Fräsen" },
+        { name: "Additive Fertigung (FDM)", niveau: "Konstruktion druckgerecht + eigener Drucker" }
+      ]
+    },
+    {
+      bereich: "Elektronik & Software",
+      eintraege: [
+        { name: "ESP32 / C++ (Arduino)", niveau: "Mehrere private Projekte" },
+        { name: "KiCad", niveau: "Eigene Platinen bis zur Fertigung" },
+        { name: "Python", niveau: "Datenauswertung und Skripte" }
+      ]
+    }
+  ],
+
+  // ---------- Kontakt ----------
+  kontakt: {
+    text: "Interesse an einem Projekt oder einer Zusammenarbeit? Ich freue mich über eine Nachricht.",
+    email: "justus.koch@gmx.net",
+    ort: "Raum Heidelberg",
+    links: [
+      // { label: "LinkedIn", url: "https://www.linkedin.com/in/justus-koch-8ba8a9247/" },
+      // { label: "GitHub",   url: "https://..." }
+    ]
+  }
+};
+</script>
+
+
+<style>
+/* ---------- Schriften lokal (kein Google-Fonts-CDN, keine Drittanbieter-Verbindung) ----------
+   Dateien im Ordner "Schriften/". Lizenz: SIL Open Font License 1.1 (siehe Schriften/LICENSE-*.txt)
+   Quelle: Fontsource (npm), identische Schnitte wie zuvor ueber Google Fonts geladen. */
+@font-face{font-family:'Saira';font-style:normal;font-weight:500;font-display:swap;src:url(Schriften/saira-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Saira';font-style:normal;font-weight:600;font-display:swap;src:url(Schriften/saira-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Saira';font-style:normal;font-weight:700;font-display:swap;src:url(Schriften/saira-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Saira';font-style:normal;font-weight:500;font-display:swap;src:url(Schriften/saira-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Saira';font-style:normal;font-weight:600;font-display:swap;src:url(Schriften/saira-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Saira';font-style:normal;font-weight:700;font-display:swap;src:url(Schriften/saira-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400;font-display:swap;src:url(Schriften/ibm-plex-sans-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:500;font-display:swap;src:url(Schriften/ibm-plex-sans-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url(Schriften/ibm-plex-sans-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400;font-display:swap;src:url(Schriften/ibm-plex-sans-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:500;font-display:swap;src:url(Schriften/ibm-plex-sans-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url(Schriften/ibm-plex-sans-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(Schriften/ibm-plex-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(Schriften/ibm-plex-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(Schriften/ibm-plex-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(Schriften/ibm-plex-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* ============================================================
+   DESIGN — Optik einer technischen Zeichnung
+   Farben und Grundwerte zentral als Variablen.
+   ============================================================ */
+:root{
+  --papier:#F5F6F3;        /* Seitenhintergrund */
+  --blatt:#FFFFFF;         /* Karten / Zeichnungsblätter */
+  --tusche:#171B20;        /* Text */
+  --grau:#5A6470;          /* Sekundärtext */
+  --linie:#C7CDD4;         /* Rahmen- und Hilfslinien */
+  --blau:#1F4B99;          /* Bauplanblau — Akzent */
+  --rot:#B3401F;           /* Maßlinien-Rot — nur für TODO-Marker */
+  --radius:2px;
+  --maxw:1120px;
+  --font-display:"Saira",sans-serif;
+  --font-body:"IBM Plex Sans",sans-serif;
+  --font-mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  background:var(--papier);
+  color:var(--tusche);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:var(--blau)}
+img{max-width:100%;display:block}
+
+/* ---- Wiederkehrende Bausteine ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grau)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blau);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--linie)}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:600;margin-bottom:28px}
+section{padding:72px 0}
+.todo{color:var(--rot);background:rgba(179,64,31,.07);padding:0 4px;border-radius:2px;font-style:normal}
+
+/* ---- Navigation ---- */
+header.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,246,243,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--linie);
+}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-name{font-family:var(--font-display);font-weight:700;font-size:17px;text-decoration:none;color:var(--tusche)}
+nav ul{display:flex;gap:22px;list-style:none}
+nav a{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--grau)}
+nav a:hover{color:var(--blau)}
+@media(max-width:640px){nav ul{gap:14px}nav a{font-size:11px}}
+
+/* ---- Hero mit Zeichnungsrahmen + Schriftfeld ---- */
+.hero{padding:56px 0 72px}
+.blatt-rahmen{
+  position:relative;background:var(--blatt);
+  border:1px solid var(--tusche);
+  padding:56px 48px 0;
+}
+/* Innenrahmen wie bei einer Zeichnung */
+.blatt-rahmen::before{
+  content:"";position:absolute;inset:10px;
+  border:1px solid var(--linie);pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:1;padding-bottom:40px;
+  display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:44px;align-items:start;
+}
+.hero-text{max-width:720px}
+/* Bild rechts als eigenes Zeichnungsfeld */
+.hero-bild{margin:0}
+.hero-bild .rahmen{
+  position:relative;border:1px solid var(--tusche);background:#fff;
+  aspect-ratio:3/4;overflow:hidden;
+}
+.hero-bild .rahmen::after{
+  content:"";position:absolute;inset:6px;border:1px solid var(--linie);pointer-events:none;
+}
+.hero-bild img{width:100%;height:100%;object-fit:cover}
+.hero-bild .platzhalter-bild{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:0 18px;white-space:pre-line;
+  font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--grau);
+  background:repeating-linear-gradient(45deg,#fff,#fff 9px,var(--blatt) 9px,var(--blatt) 18px);
+}
+.hero-bild figcaption{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--grau);margin-top:8px;padding-top:6px;border-top:1px solid var(--linie);
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:30px}
+  .hero-bild{max-width:260px}
+}
+.hero h1{font-size:clamp(38px,6vw,64px);font-weight:700;letter-spacing:-.01em}
+.hero .rolle{font-family:var(--font-mono);font-size:14px;color:var(--blau);margin:10px 0 24px;letter-spacing:.05em}
+.hero p{color:var(--grau);max-width:640px;white-space:pre-line}
+.hero .cta{display:inline-block;margin-top:28px;background:var(--blau);color:#fff;text-decoration:none;
+  font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  padding:12px 22px;border-radius:var(--radius)}
+.hero .cta:hover{background:#173C7C}
+/* Schriftfeld (DIN-Vorbild) unten rechts */
+.schriftfeld{
+  position:relative;z-index:1;
+  margin:0 -48px;margin-top:8px;
+  border-top:1px solid var(--tusche);
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  font-family:var(--font-mono);font-size:11px;
+}
+.schriftfeld div{padding:8px 14px;border-right:1px solid var(--linie)}
+.schriftfeld div:last-child{border-right:none}
+.schriftfeld .lbl{display:block;color:var(--grau);letter-spacing:.08em;text-transform:uppercase;font-size:9px;margin-bottom:2px}
+@media(max-width:700px){
+  .blatt-rahmen{padding:36px 22px 0}
+  .schriftfeld{margin:0 -22px;grid-template-columns:1fr 1fr}
+  .schriftfeld div:nth-child(2){border-right:none}
+}
+
+/* ---- Profil-Kacheln ---- */
+.kacheln{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.kachel{background:var(--blatt);border:1px solid var(--linie);padding:24px;border-radius:var(--radius)}
+.kachel h3{font-size:17px;font-weight:600;margin-bottom:8px}
+.kachel p{font-size:14.5px;color:var(--grau)}
+@media(max-width:800px){.kacheln{grid-template-columns:1fr}}
+
+/* ---- Werdegang ---- */
+.werdegang{display:flex;flex-direction:column;gap:0}
+.wg-item{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--linie)}
+.wg-item:last-child{border-bottom:1px solid var(--linie)}
+.wg-zeit{font-family:var(--font-mono);font-size:13px;color:var(--blau);padding-top:3px}
+.wg-item h3{font-size:18px;font-weight:600}
+.wg-item .ort{font-size:14px;color:var(--grau);margin:2px 0 8px}
+.wg-item p{font-size:14.5px;color:var(--grau)}
+@media(max-width:640px){.wg-item{grid-template-columns:1fr;gap:4px}}
+
+/* ---- Projekt-Grid ---- */
+.projekte-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.projekt-card{
+  background:var(--blatt);border:1px solid var(--linie);border-radius:var(--radius);
+  text-align:left;cursor:pointer;font:inherit;color:inherit;
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:border-color .15s ease, transform .15s ease;
+}
+.projekt-card:hover,.projekt-card:focus-visible{border-color:var(--blau);transform:translateY(-2px)}
+.projekt-card:focus-visible{outline:2px solid var(--blau);outline-offset:2px}
+.pc-bild{aspect-ratio:16/10;background:#E9ECEF;position:relative}
+.pc-bild img{width:100%;height:100%;object-fit:cover}
+.pc-bild .platzhalter{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:11px;color:var(--grau);letter-spacing:.08em;
+  background:
+    linear-gradient(45deg,transparent 49.6%,var(--linie) 49.6%,var(--linie) 50.4%,transparent 50.4%),
+    linear-gradient(-45deg,transparent 49.6%,var(--linie) 49.6%,var(--linie) 50.4%,transparent 50.4%);
+}
+.pc-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-nr{font-family:var(--font-mono);font-size:11px;color:var(--blau);letter-spacing:.1em}
+.pc-body h3{font-size:17px;font-weight:600}
+.pc-body p{font-size:14px;color:var(--grau);flex:1}
+.pc-mehr{font-family:var(--font-mono);font-size:12px;color:var(--blau);letter-spacing:.06em;margin-top:8px}
+
+/* ---- Modal / Popup ---- */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(23,27,32,.55);z-index:100;
+  display:none;align-items:flex-start;justify-content:center;
+  padding:5vh 16px;overflow-y:auto;
+}
+.modal-backdrop.offen{display:flex}
+.modal{
+  background:var(--blatt);border:1px solid var(--tusche);border-radius:var(--radius);
+  max-width:760px;width:100%;position:relative;
+}
+.modal-kopf{
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--tusche);padding:14px 22px;
+}
+.modal-kopf .mono{color:var(--blau)}
+.modal-close{
+  background:none;border:1px solid var(--linie);border-radius:var(--radius);
+  width:34px;height:34px;cursor:pointer;font-size:18px;line-height:1;color:var(--tusche);
+}
+.modal-close:hover{border-color:var(--blau);color:var(--blau)}
+.modal-body{padding:24px}
+.modal-body h3{font-size:24px;margin-bottom:14px}
+.modal-body .lang{white-space:pre-line;color:var(--grau);font-size:15px}
+.technik{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.technik span{
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;
+  border:1px solid var(--linie);border-radius:2px;padding:4px 10px;color:var(--tusche);
+}
+/* Galerie im Modal */
+.galerie{position:relative;background:#E9ECEF;aspect-ratio:16/9;margin-bottom:20px;border:1px solid var(--linie)}
+.galerie img{width:100%;height:100%;object-fit:contain;background:#fff}
+.galerie .platzhalter{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:12px;color:var(--grau);text-align:center;padding:16px;
+}
+.gal-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:var(--blatt);border:1px solid var(--tusche);border-radius:var(--radius);
+  width:38px;height:38px;cursor:pointer;font-size:16px;color:var(--tusche);
+}
+.gal-btn:hover{color:var(--blau);border-color:var(--blau)}
+.gal-btn.prev{left:10px}.gal-btn.next{right:10px}
+.gal-zaehler{
+  position:absolute;bottom:8px;right:10px;
+  font-family:var(--font-mono);font-size:11px;background:var(--blatt);
+  border:1px solid var(--linie);padding:2px 8px;
+}
+
+/* ---- Kompetenzen ---- */
+.komp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.komp-block{background:var(--blatt);border:1px solid var(--linie);border-radius:var(--radius);padding:22px 24px}
+.komp-block h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blau);font-weight:500;margin-bottom:14px}
+.komp-block table{width:100%;border-collapse:collapse;font-size:14px}
+.komp-block td{padding:7px 0;border-top:1px solid var(--linie);vertical-align:top}
+.komp-block tr:first-child td{border-top:none}
+.komp-block td:first-child{font-weight:500;padding-right:14px;white-space:nowrap}
+.komp-block td:last-child{color:var(--grau)}
+@media(max-width:800px){.komp-grid{grid-template-columns:1fr}.komp-block td:first-child{white-space:normal}}
+
+/* ---- Kontakt ---- */
+.kontakt-box{background:var(--blatt);border:1px solid var(--tusche);padding:40px;text-align:center}
+.kontakt-box p{color:var(--grau);margin-bottom:16px}
+.kontakt-box .email{font-family:var(--font-mono);font-size:16px}
+.kontakt-links{display:flex;gap:16px;justify-content:center;margin-top:16px}
+.kontakt-links a{font-family:var(--font-mono);font-size:13px}
+
+/* ---- Footer ---- */
+footer{border-top:1px solid var(--linie);padding:22px 0 40px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+footer .footer-recht a{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--grau);text-decoration:none;margin-left:18px;
+}
+footer .footer-recht a:first-child{margin-left:0}
+footer .footer-recht a:hover{color:var(--blau)}
+</style>
+</head>
+<body>
+
+<a class="skip-to-content" href="#projekte" style="position:absolute;left:-9999px">Zum Inhalt springen</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-name" href="#top" id="navName"></a>
+    <nav aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#werdegang">Werdegang</a></li>
+        <li><a href="#projekte">Projekte</a></li>
+        <li><a href="#kompetenzen">Kompetenzen</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero als Zeichnungsblatt mit Schriftfeld -->
+  <section class="hero" id="profil">
+    <div class="wrap">
+      <div class="blatt-rahmen">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h1 id="heroName"></h1>
+            <div class="rolle" id="heroRolle"></div>
+            <p id="heroText"></p>
+            <a class="cta" href="#projekte">Projekte ansehen</a>
+          </div>
+          <figure class="hero-bild">
+            <div class="rahmen" id="heroBildRahmen"></div>
+            <figcaption id="heroBildUnterschrift"></figcaption>
+          </figure>
+        </div>
+        <div class="schriftfeld" aria-hidden="true">
+          <div><span class="lbl">Name</span><span id="sfName"></span></div>
+          <div><span class="lbl">Fachrichtung</span>Maschinenbau</div>
+          <div><span class="lbl">Blatt</span>1 / 1</div>
+          <div><span class="lbl">Stand</span><span id="sfDatum"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profil-Kacheln -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="kacheln" id="kacheln"></div>
+    </div>
+  </section>
+
+  <!-- Werdegang -->
+  <section id="werdegang">
+    <div class="wrap">
+      <div class="eyebrow">Werdegang</div>
+      <h2>Studium &amp; Praxis — parallel</h2>
+      <div class="werdegang" id="werdegangListe"></div>
+    </div>
+  </section>
+
+  <!-- Projekte -->
+  <section id="projekte">
+    <div class="wrap">
+      <div class="eyebrow">Projekte</div>
+      <h2>Ausgewählte Projekte</h2>
+      <div class="projekte-grid" id="projekteGrid"></div>
+    </div>
+  </section>
+
+  <!-- Kompetenzen -->
+  <section id="kompetenzen">
+    <div class="wrap">
+      <div class="eyebrow">Kompetenzen</div>
+      <h2>Werkzeuge &amp; Fähigkeiten</h2>
+      <div class="komp-grid" id="kompGrid"></div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="eyebrow">Kontakt</div>
+      <div class="kontakt-box">
+        <p id="kontaktText"></p>
+        <div class="email" id="kontaktEmail"></div>
+        <div class="kontakt-links" id="kontaktLinks"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono" id="footerZeile"></span>
+    <span class="footer-recht">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </span>
+  </div>
+</footer>
+
+<!-- Projekt-Popup -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitel">
+  <div class="modal">
+    <div class="modal-kopf">
+      <span class="mono" id="modalNr"></span>
+      <button class="modal-close" type="button" aria-label="Schließen" onclick="schliesseModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   RENDER-LOGIK — muss nicht bearbeitet werden.
+   Liest CONTENT und baut die Seite auf.
+   ============================================================ */
+
+// [TODO: ...] im Text sichtbar rot markieren
+function markiereTodos(text){
+  return text.replace(/\[TODO:[^\]]*\]/g, m => `<em class="todo">${m}</em>`);
+}
+function absatzHtml(text){
+  return markiereTodos(text)
+    .split("\n\n").map(a => a).join("\n\n"); // pre-line übernimmt die Umbrüche
+}
+
+// ---- Kopf / Hero ----
+document.title = CONTENT.name + " — Portfolio";
+document.getElementById("navName").textContent = CONTENT.name;
+document.getElementById("heroName").textContent = CONTENT.name;
+document.getElementById("heroRolle").textContent = CONTENT.titel + "  ·  " + CONTENT.untertitel;
+document.getElementById("heroText").innerHTML = absatzHtml(CONTENT.ueberMich);
+// Bild im Kopf: nur einbinden, wenn im CONTENT eine Datei steht.
+// Laedt die Datei nicht (Pfad falsch oder Datei fehlt), greift onerror
+// und ersetzt das Bild durch einen neutralen Platzhalter.
+(function heroBildAufbauen(){
+  const cfg = CONTENT.heroBild || {};
+  const rahmen = document.getElementById("heroBildRahmen");
+  const unterschrift = document.getElementById("heroBildUnterschrift");
+  const pfad = cfg.datei || "Bilder/Portrait.jpg";
+
+  const platzhalter = () => {
+    rahmen.innerHTML =
+      '<div class="platzhalter-bild">Noch kein Foto hinterlegt\nDatei unter \u201e' +
+      pfad + '\u201c ablegen</div>';
+  };
+
+  if (!cfg.datei){
+    platzhalter();
+  } else {
+    const bild = new Image();
+    bild.alt = cfg.alt || CONTENT.name;
+    bild.onerror = platzhalter;
+    bild.src = pfad;
+    rahmen.appendChild(bild);
+  }
+
+  unterschrift.textContent = cfg.bildunterschrift || CONTENT.titel;
+})();
+
+document.getElementById("sfName").textContent = CONTENT.name;
+document.getElementById("sfDatum").textContent =
+  new Date().toLocaleDateString("de-DE", {year:"numeric", month:"2-digit"});
+document.getElementById("footerZeile").textContent =
+   new Date().getFullYear() + " " + CONTENT.name;
+
+// ---- Kacheln ----
+document.getElementById("kacheln").innerHTML = CONTENT.kacheln.map(k => `
+  <div class="kachel">
+    <h3>${k.titel}</h3>
+    <p>${markiereTodos(k.text)}</p>
+  </div>`).join("");
+
+// ---- Werdegang ----
+document.getElementById("werdegangListe").innerHTML = CONTENT.werdegang.map(w => `
+  <div class="wg-item">
+    <div class="wg-zeit">${w.zeitraum}</div>
+    <div>
+      <h3>${w.titel}</h3>
+      <div class="ort">${markiereTodos(w.ort)}</div>
+      <p>${markiereTodos(w.text)}</p>
+    </div>
+  </div>`).join("");
+
+// ---- Projekte ----
+const projekte = CONTENT.projekte.filter(p => p.sichtbar !== false);
+
+// Projektnummer wird beim Rendern vergeben: laufend ueber die sichtbaren
+// Projekte, in der Reihenfolge des CONTENT-Arrays. Umsortieren oder
+// Ausblenden nummeriert automatisch neu, ohne Luecken.
+const projektNr = i => "PRJ-" + String(i + 1).padStart(3, "0");
+
+document.getElementById("projekteGrid").innerHTML = projekte.map((p, i) => `
+  <button class="projekt-card" type="button" onclick="oeffneProjekt(${i})" aria-haspopup="dialog">
+    <div class="pc-bild">
+      <div class="platzhalter">Bild folgt</div>
+      ${p.bilder && p.bilder.length ? `<img src="${p.bilder[0]}" alt="${p.titel}" loading="lazy"
+        onload="this.previousElementSibling && (this.previousElementSibling.style.display='none')"
+        onerror="this.remove()">` : ""}
+    </div>
+    <div class="pc-body">
+      <span class="pc-nr">${projektNr(i)}</span>
+      <h3>${p.titel}</h3>
+      <p>${markiereTodos(p.kurz)}</p>
+      <span class="pc-mehr">Details öffnen →</span>
+    </div>
+  </button>`).join("");
+
+// ---- Kompetenzen ----
+document.getElementById("kompGrid").innerHTML = CONTENT.kompetenzen.map(b => `
+  <div class="komp-block">
+    <h3>${b.bereich}</h3>
+    <table>${b.eintraege.map(e => `
+      <tr><td>${e.name}</td><td>${markiereTodos(e.niveau)}</td></tr>`).join("")}
+    </table>
+  </div>`).join("");
+
+// ---- Kontakt ----
+document.getElementById("kontaktText").innerHTML = markiereTodos(CONTENT.kontakt.text);
+const emailEl = document.getElementById("kontaktEmail");
+if (CONTENT.kontakt.email.includes("[TODO")) {
+  emailEl.innerHTML = markiereTodos(CONTENT.kontakt.email);
+} else {
+  emailEl.innerHTML = `<a href="mailto:${CONTENT.kontakt.email}">${CONTENT.kontakt.email}</a>`;
+}
+document.getElementById("kontaktLinks").innerHTML = (CONTENT.kontakt.links || [])
+  .map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join("");
+
+// ---- Modal-Steuerung ----
+const backdrop = document.getElementById("modalBackdrop");
+const modalBody = document.getElementById("modalBody");
+const modalNr = document.getElementById("modalNr");
+let galIndex = 0, galBilder = [];
+let letzterFokus = null;
+
+function oeffneProjekt(i){
+  const p = projekte[i];
+  galBilder = p.bilder || [];
+  galIndex = 0;
+  modalNr.textContent = projektNr(i) + " — Projektblatt";
+  modalBody.innerHTML = `
+    <div class="galerie" id="galerie"></div>
+    <h3 id="modalTitel">${p.titel}</h3>
+    <div class="lang">${absatzHtml(p.lang)}</div>
+    <div class="technik">${(p.technik||[]).map(t => `<span>${t}</span>`).join("")}</div>`;
+  zeigeGalerieBild();
+  letzterFokus = document.activeElement;
+  backdrop.classList.add("offen");
+  document.body.style.overflow = "hidden";
+  document.querySelector(".modal-close").focus();
+}
+
+function zeigeGalerieBild(){
+  const g = document.getElementById("galerie");
+  if (!g) return;
+  if (!galBilder.length){
+    g.innerHTML = `<div class="platzhalter">Noch keine Bilder hinterlegt —\nDateien in den Ordner „Bilder/" legen und im CONTENT-Block eintragen.</div>`;
+    return;
+  }
+  const src = galBilder[galIndex];
+  g.innerHTML = `
+    <div class="platzhalter">Bild nicht gefunden: ${src}</div>
+    <img src="${src}" alt="" style="position:relative"
+      onload="this.previousElementSibling.style.display='none'">
+    ${galBilder.length > 1 ? `
+      <button class="gal-btn prev" type="button" aria-label="Vorheriges Bild" onclick="galWechsel(-1)">‹</button>
+      <button class="gal-btn next" type="button" aria-label="Nächstes Bild" onclick="galWechsel(1)">›</button>
+      <span class="gal-zaehler">${galIndex+1} / ${galBilder.length}</span>` : ""}`;
+}
+function galWechsel(richtung){
+  galIndex = (galIndex + richtung + galBilder.length) % galBilder.length;
+  zeigeGalerieBild();
+}
+
+
+function schliesseModal(){
+  backdrop.classList.remove("offen");
+  document.body.style.overflow = "";
+  if (letzterFokus) letzterFokus.focus();
+}
+backdrop.addEventListener("click", e => { if (e.target === backdrop) schliesseModal(); });
+document.addEventListener("keydown", e => {
+  if (!backdrop.classList.contains("offen")) return;
+  if (e.key === "Escape") schliesseModal();
+  if (galBilder.length > 1 && document.getElementById("galerie")){
+    if (e.key === "ArrowLeft") galWechsel(-1);
+    if (e.key === "ArrowRight") galWechsel(1);
+  }
+});
+</script>
+</body>
+</html>
