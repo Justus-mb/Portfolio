@@ -71,7 +71,12 @@ const CONTENT = {
   heroBild: {
     datei: "Bilder/Portrait.jpg",
     alt: "Portraitfoto Justus Koch",
-    bildunterschrift: "Justus Koch \u00b7 Konstruktion & Werkstatt"
+    bildunterschrift: "Justus Koch \u00b7 Konstruktion & Werkstatt",
+    // Ausschnitt: zoom 1 = ganzes Bild, gr\u00f6\u00dfer = n\u00e4her dran.
+    // fokus = Punkt, der beim Zoomen fest bleibt ("waagerecht senkrecht"),
+    // z. B. "50% 10%" = mittig, nahe Oberkante. Das Originalfoto bleibt unver\u00e4ndert.
+    zoom: 1.6,
+    fokus: "50% 8%"
   },
 
   // ---------- 3 Profil-Kacheln ----------
@@ -426,9 +431,9 @@ section[id]{scroll-margin-top:56px}
   aspect-ratio:3/4;overflow:hidden;
 }
 .hero-bild .rahmen::after{
-  content:"";position:absolute;inset:6px;border:1px solid var(--linie);pointer-events:none;
+  content:"";position:absolute;inset:6px;border:1px solid var(--linie);pointer-events:none;z-index:1;
 }
-.hero-bild img{width:100%;height:100%;object-fit:cover}
+.hero-bild img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .hero-bild .platzhalter-bild{
   width:100%;height:100%;display:flex;align-items:center;justify-content:center;
   text-align:center;padding:0 18px;white-space:pre-line;
@@ -810,6 +815,12 @@ document.getElementById("heroText").innerHTML = absatzHtml(CONTENT.ueberMich);
     bild.alt = cfg.alt || CONTENT.name;
     bild.onerror = platzhalter;
     bild.src = pfad;
+    // Ausschnitt aus CONTENT anwenden (Zoom um den Fokuspunkt)
+    const zoom = Number(cfg.zoom) || 1;
+    if (zoom !== 1){
+      bild.style.transformOrigin = cfg.fokus || "50% 10%";
+      bild.style.transform = `scale(${zoom})`;
+    }
     rahmen.appendChild(bild);
   }
 
