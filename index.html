@@ -285,6 +285,8 @@ const CONTENT = {
     text: "Auf der Suche nach Verstärkung in Konstruktion oder Produktentwicklung? Ich freue mich über eine Nachricht.",
     email: "justus.koch@gmx.net",
     ort: "Raum Heidelberg",
+    // Erscheint im Ausdruck / PDF in der Fußzeile als Verweis auf die Online-Version
+    webseite: "justus-mb.de",
     links: [
       // { label: "LinkedIn", url: "https://www.linkedin.com/in/justus-koch-8ba8a9247/" },
       // { label: "GitHub",   url: "https://..." }
@@ -455,6 +457,14 @@ section[id]{scroll-margin-top:56px}
   font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
   padding:12px 22px;border-radius:var(--radius)}
 .hero .cta:hover{background:#173C7C}
+.cta-zeile{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .cta-zeile .cta{margin-top:0;border:1px solid var(--blau)}
+/* Zweiter Knopf: gleiche Form, nur Kontur */
+.hero .cta-zweit{background:transparent;color:var(--blau);border:1px solid var(--blau);cursor:pointer;font:inherit;
+  font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.hero .cta-zweit:hover{background:rgba(31,75,153,.07)}
+/* Druck-Elemente sind am Bildschirm ausgeblendet */
+.druck-projekte,.nur-druck{display:none}
 /* Schriftfeld (DIN-Vorbild) unten rechts */
 .schriftfeld{
   position:relative;z-index:1;
@@ -638,6 +648,92 @@ body{overflow-wrap:break-word}         /* lange Wörter brechen statt Überbreit
   .modal-body{padding:18px}
   .modal-kopf{padding:12px 16px}
 }
+
+/* ============================================================
+   DRUCK / PDF (A4)
+   Steht bewusst am Ende, damit es die Bildschirm-Regeln
+   (auch die für schmale Breiten) überschreibt.
+   ============================================================ */
+@page{size:A4;margin:14mm 14mm 15mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{scroll-behavior:auto}
+  body{background:#fff;font-size:9.5pt;line-height:1.45;overflow:visible}
+  a{color:var(--tusche);text-decoration:none}
+
+  /* Nur Bildschirm: ausblenden */
+  header.nav,.skip-to-content,.cta-zeile,.projekte-grid,
+  .modal-backdrop,.lightbox,footer .footer-recht,#footerZeile{display:none!important}
+  /* Nur Druck: einblenden */
+  .druck-projekte{display:block}
+  .nur-druck{display:inline}
+
+  .wrap{max-width:none;padding:0}
+  section{padding:0 0 5mm}
+  .eyebrow{font-size:7.5pt;margin-bottom:2mm;break-after:avoid}
+  h2{font-size:15pt;margin-bottom:4mm;break-after:avoid}
+
+  /* Kopf als Zeichnungsblatt, zweispaltig mit Foto */
+  .hero{padding:0 0 6mm}
+  .blatt-rahmen{padding:9mm 8mm 0}
+  .blatt-rahmen::before{inset:2mm}
+  .hero-inner{grid-template-columns:minmax(0,1fr) 44mm;gap:8mm;padding-bottom:6mm}
+  .hero-bild{max-width:none}
+  .hero h1{font-size:26pt}
+  .hero .rolle{font-size:9.5pt;margin:2mm 0 4mm}
+  .hero p{font-size:9.5pt;max-width:none}
+  .hero-bild figcaption{font-size:6.5pt}
+  .schriftfeld{margin:0 -8mm;grid-template-columns:repeat(4,1fr);font-size:8pt}
+  .schriftfeld div:nth-child(2){border-right:1px solid var(--linie)}
+  .schriftfeld .lbl{font-size:6pt}
+
+  /* Kacheln dreispaltig */
+  .kacheln{grid-template-columns:repeat(3,1fr);gap:4mm}
+  .kachel{padding:4mm;break-inside:avoid}
+  .kachel h3{font-size:10.5pt;margin-bottom:1.5mm}
+  .kachel p{font-size:8.5pt}
+
+  /* Werdegang */
+  .wg-item{grid-template-columns:30mm 1fr;gap:5mm;padding:3.5mm 0;break-inside:avoid}
+  .wg-zeit{font-size:8.5pt}
+  .wg-item h3{font-size:11pt}
+  .wg-item .ort,.wg-item p{font-size:8.5pt}
+
+  /* Projekte: neue Seite, jedes Projekt als kompakter Block mit Bild */
+  #projekte{break-before:page}
+  .druck-projekt{
+    display:grid;grid-template-columns:minmax(0,1fr) 58mm;gap:6mm;
+    padding:4mm 0;border-top:1px solid var(--linie);break-inside:avoid;
+  }
+  .druck-projekt:last-child{border-bottom:1px solid var(--linie)}
+  .druck-projekt .pc-nr{font-size:7.5pt}
+  .druck-projekt h3{font-size:11.5pt;margin:.5mm 0 1.5mm}
+  .druck-projekt .lang{white-space:pre-line;color:var(--grau);font-size:8.5pt}
+  .druck-projekt .technik{margin-top:2.5mm;gap:1.5mm}
+  .druck-projekt .technik span{font-size:7pt;padding:.5mm 2mm}
+  .druck-projekt .dp-bild{border:1px solid var(--linie);background:#fff;height:40mm;display:flex;align-items:center;justify-content:center}
+  .druck-projekt .dp-bild img{max-width:100%;max-height:100%;object-fit:contain}
+  .druck-projekt.ohne-bild{grid-template-columns:1fr}
+
+  /* Kompetenzen zweispaltig */
+  .komp-grid{grid-template-columns:repeat(2,1fr);gap:4mm}
+  .komp-block{padding:3mm 4mm;break-inside:avoid}
+  .komp-block h3{font-size:7.5pt;margin-bottom:2mm}
+  .komp-block table{font-size:8.5pt}
+  .komp-block td{padding:.7mm 0}
+  .komp-block td:first-child{white-space:nowrap}
+
+  /* Kontakt: Adressen als Klartext ausgeben */
+  #kontakt{break-inside:avoid}
+  .kontakt-box{padding:4mm}
+  .kontakt-box p{margin-bottom:1mm}
+  .kontakt-box .email{font-size:10.5pt}
+  .kontakt-links a::after{content:" (" attr(href) ")";color:var(--grau)}
+
+  footer{border-top:1px solid var(--linie);padding:3mm 0 0}
+  footer .mono{font-size:7.5pt}
+  .todo{background:none}
+}
 </style>
 </head>
 <body>
@@ -675,7 +771,10 @@ body{overflow-wrap:break-word}         /* lange Wörter brechen statt Überbreit
             <h1 id="heroName"></h1>
             <div class="rolle" id="heroRolle"></div>
             <p id="heroText"></p>
-            <a class="cta" href="#projekte">Projekte ansehen</a>
+            <div class="cta-zeile">
+              <a class="cta" href="#projekte">Projekte ansehen</a>
+              <button class="cta cta-zweit" type="button" id="druckKnopf">Als PDF speichern</button>
+            </div>
           </div>
           <figure class="hero-bild">
             <div class="rahmen" id="heroBildRahmen"></div>
@@ -714,6 +813,8 @@ body{overflow-wrap:break-word}         /* lange Wörter brechen statt Überbreit
       <div class="eyebrow">Projekte</div>
       <h2>Ausgewählte Projekte</h2>
       <div class="projekte-grid" id="projekteGrid"></div>
+      <!-- Nur im Ausdruck sichtbar: alle Projekte mit Langtext und Bild -->
+      <div class="druck-projekte" id="druckProjekte"></div>
     </div>
   </section>
 
@@ -743,6 +844,7 @@ body{overflow-wrap:break-word}         /* lange Wörter brechen statt Überbreit
 <footer>
   <div class="wrap">
     <span class="mono" id="footerZeile"></span>
+    <span class="mono nur-druck" id="druckFusszeile"></span>
     <span class="footer-recht">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
@@ -875,6 +977,24 @@ document.getElementById("projekteGrid").innerHTML = projekte.map((p, i) => `
     </div>
   </button>`).join("");
 
+// ---- Druckfassung der Projekte ----
+// Am Bildschirm ausgeblendet. Bilder stehen zunächst nur in data-src,
+// damit sie nicht bei jedem Seitenaufruf mitgeladen werden.
+document.getElementById("druckProjekte").innerHTML = projekte.map((p, i) => {
+  const bild = p.bilder && p.bilder.length ? p.bilder[0] : "";
+  const text = (p.lang || "").trim() || p.kurz;     // leerer Langtext: Kurztext nehmen
+  return `
+  <article class="druck-projekt${bild ? "" : " ohne-bild"}">
+    <div>
+      <span class="pc-nr">${projektNr(i)}</span>
+      <h3>${p.titel}</h3>
+      <div class="lang">${absatzHtml(text)}</div>
+      <div class="technik">${(p.technik || []).map(t => `<span>${t}</span>`).join("")}</div>
+    </div>
+    ${bild ? `<div class="dp-bild"><img data-src="${bild}" alt="${p.titel}"></div>` : ""}
+  </article>`;
+}).join("");
+
 // ---- Kompetenzen ----
 document.getElementById("kompGrid").innerHTML = CONTENT.kompetenzen.map(b => `
   <div class="komp-block">
@@ -894,6 +1014,43 @@ if (CONTENT.kontakt.email.includes("[TODO")) {
 }
 document.getElementById("kontaktLinks").innerHTML = (CONTENT.kontakt.links || [])
   .map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join("");
+
+// ---- Drucken / Als PDF speichern ----
+document.getElementById("druckFusszeile").textContent =
+  "Online-Version: " + (CONTENT.kontakt.webseite || location.host) +
+  "  ·  Stand " + new Date().toLocaleDateString("de-DE", { month: "2-digit", year: "numeric" });
+
+// Druckbilder laden; Promise ist erfüllt, wenn alle geladen sind
+// (oder fehlgeschlagen, oder nach max. 8 s, damit der Druck nie hängt)
+function ladeDruckBilder(){
+  const bilder = [...document.querySelectorAll("#druckProjekte img[data-src]")];
+  const geladen = bilder.map(img => new Promise(fertig => {
+    img.onload = img.onerror = fertig;
+    img.src = img.dataset.src;
+    img.removeAttribute("data-src");
+    if (img.complete) fertig();
+  }));
+  const zeitlimit = new Promise(fertig => setTimeout(fertig, 8000));
+  return Promise.race([Promise.all(geladen), zeitlimit]);
+}
+
+// Dateiname des PDFs kommt vom Seitentitel, daher kurz umbenennen
+const normalerTitel = document.title;
+const pdfTitel = CONTENT.name.replace(/\s+/g, "_") + "_Portfolio";
+window.addEventListener("beforeprint", () => { document.title = pdfTitel; ladeDruckBilder(); });
+window.addEventListener("afterprint",  () => { document.title = normalerTitel; });
+
+// Knopf: erst Bilder laden, dann Druckdialog (dort „Als PDF speichern" wählbar)
+const druckKnopf = document.getElementById("druckKnopf");
+druckKnopf.addEventListener("click", async () => {
+  const text = druckKnopf.textContent;
+  druckKnopf.textContent = "Wird vorbereitet …";
+  druckKnopf.disabled = true;
+  await ladeDruckBilder();
+  druckKnopf.textContent = text;
+  druckKnopf.disabled = false;
+  window.print();
+});
 
 // ---- Navigation: Menü mobil auf-/zuklappen ----
 const navToggle = document.getElementById("navToggle");
